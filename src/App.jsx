@@ -17,7 +17,7 @@ function App() {
     setError(null)
     
     try {
-      const results = await searchVideos(videoUrl, 20)
+      const results = await searchVideos(videoUrl)
       if (results && Array.isArray(results)) {
         setVideos(results)
       } else {
@@ -38,7 +38,8 @@ function App() {
     
     if (isInPlaylist) {
       setPlaylist(playlist.filter(item => item.id.videoId !== video.id.videoId))
-      if (isPlaying && playlist.length <= 1) {
+      // Reset playing state if removing currently playing video
+      if (isPlaying && currentVideoIndex >= playlist.length - 1) {
         setIsPlaying(false)
         setCurrentVideoIndex(0)
       }
@@ -64,9 +65,9 @@ function App() {
   }
 
   return (
-    <div className="app-container">
+    <div className="app-container nes-container">
       <div className="main-content">
-        <h1>BeatBot - Music Mood Analyzer</h1>
+        <h1 className="nes-text">BeatBot - Music Mood Analyzer</h1>
         
         <form onSubmit={handleSearch} className="search-form">
           <input
@@ -74,18 +75,18 @@ function App() {
             value={videoUrl}
             onChange={(e) => setVideoUrl(e.target.value)}
             placeholder="Enter search keywords"
-            className="search-input"
+            className="nes-input search-input"
           />
-          <button type="submit" className="search-button" disabled={loading}>
+          <button type="submit" className="nes-btn is-primary search-button" disabled={loading}>
             {loading ? 'Searching...' : 'Search'}
           </button>
         </form>
 
-        {error && <div className="error">{error}</div>}
+        {error && <div className="nes-container is-rounded is-error error">{error}</div>}
 
         <div className="video-list">
           {videos.map((video) => (
-            <div key={video.id.videoId} className="video-item-container">
+            <div key={video.id.videoId} className="video-item-container nes-container is-rounded">
               <a 
                 href={getVideoUrl(video.id.videoId)}
                 target="_blank"
@@ -97,15 +98,15 @@ function App() {
                     src={video.snippet.thumbnails.medium.url} 
                     alt={video.snippet.title}
                   />
-                  <div className="play-icon">▶</div>
+                  <div className="play-icon nes-icon is-medium star"></div>
                 </div>
                 <div className="video-info">
-                  <h3>{video.snippet.title}</h3>
-                  <p className="channel-title">{video.snippet.channelTitle}</p>
+                  <h3 className="nes-text">{video.snippet.title}</h3>
+                  <p className="channel-title nes-text is-disabled">{video.snippet.channelTitle}</p>
                 </div>
               </a>
               <button 
-                className={`playlist-toggle ${isVideoInPlaylist(video.id.videoId) ? 'remove' : 'add'}`}
+                className={`nes-btn ${isVideoInPlaylist(video.id.videoId) ? 'is-error' : 'is-success'} playlist-toggle`}
                 onClick={() => togglePlaylist(video)}
               >
                 {isVideoInPlaylist(video.id.videoId) ? '−' : '+'}
@@ -115,14 +116,14 @@ function App() {
         </div>
       </div>
 
-      <div className="playlist-sidebar">
-        <h2>Playlist ({playlist.length})</h2>
+      <div className="playlist-sidebar nes-container is-rounded">
+        <h2 className="nes-text">Playlist ({playlist.length})</h2>
         <div className="playlist-items">
           {playlist.length === 0 ? (
-            <p className="playlist-empty">Add some videos to your playlist!</p>
+            <p className="playlist-empty nes-text is-disabled">Add some videos to your playlist!</p>
           ) : (
             playlist.map((video, index) => (
-              <div key={video.id.videoId} className="playlist-item">
+              <div key={video.id.videoId} className="playlist-item nes-container is-rounded">
                 <a 
                   href={getVideoUrl(video.id.videoId)}
                   target="_blank"
@@ -134,12 +135,12 @@ function App() {
                     alt={video.snippet.title}
                   />
                   <div className="playlist-item-info">
-                    <h4>{video.snippet.title}</h4>
-                    <p>{video.snippet.channelTitle}</p>
+                    <h4 className="nes-text">{video.snippet.title}</h4>
+                    <p className="nes-text is-disabled">{video.snippet.channelTitle}</p>
                   </div>
                 </a>
                 <button 
-                  className="playlist-remove"
+                  className="nes-btn is-error playlist-remove"
                   onClick={() => togglePlaylist(video)}
                 >
                   ×
@@ -151,7 +152,7 @@ function App() {
         {playlist.length > 0 && (
           <div className="playlist-controls">
             <button 
-              className={`playlist-play-button ${isPlaying ? 'playing' : ''}`}
+              className={`nes-btn ${isPlaying ? 'is-error' : 'is-primary'} playlist-play-button`}
               onClick={togglePlayback}
             >
               {isPlaying ? 'Stop' : 'Play Playlist'}
