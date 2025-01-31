@@ -1,0 +1,377 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.container {
+  width: 100%;
+}
+
+.search-form {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 0 1rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: 1px solid #646cff;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  background: transparent;
+  color: inherit;
+}
+
+.search-button {
+  min-width: 120px;
+  font-size: 1.1rem;
+  padding: 0.8em 1.5em;
+}
+
+.error {
+  color: #ff4444;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: rgba(255, 68, 68, 0.1);
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.video-item-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s;
+}
+
+.video-item-container:hover {
+  transform: translateY(-4px);
+}
+
+.playlist-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.playlist-toggle.add {
+  background-color: #4caf50;
+  color: white;
+}
+
+.playlist-toggle.remove {
+  background-color: #f44336;
+  color: white;
+}
+
+.playlist-toggle:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.video-item {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+}
+
+.video-thumbnail img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.video-item-container:hover .play-icon {
+  opacity: 1;
+}
+
+.video-info {
+  padding: 1rem;
+  text-align: left;
+}
+
+.video-info h3 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.channel-title {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .video-list {
+    grid-template-columns: 1fr;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+}
+
+.app-container {
+  display: flex;
+  gap: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem;
+  height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.playlist-sidebar {
+  width: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1rem;
+  height: calc(100vh - 4rem);
+  position: sticky;
+  top: 2rem;
+  overflow-y: auto;
+}
+
+.playlist-sidebar h2 {
+  margin: 0 0 1rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.playlist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.playlist-item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.playlist-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.playlist-item img {
+  width: 90px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.playlist-item-info {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.playlist-item-info h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlist-item-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.playlist-remove {
+  background: none;
+  border: none;
+  color: #ff4444;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.playlist-item:hover .playlist-remove {
+  opacity: 1;
+}
+
+.playlist-empty {
+  color: #888;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.video-list {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .playlist-sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+  }
+
+  .main-content {
+    padding-right: 0;
+  }
+}
+
+.playlist-item-link {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
+.playlist-controls {
+  position: sticky;
+  bottom: 0;
+  background: rgba(18, 18, 18, 0.9);
+  padding: 1rem;
+  margin: 0 -1rem -1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.playlist-play-button {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  background: #646cff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.playlist-play-button:hover {
+  background: #747bff;
+}
+
+.playlist-play-button.playing {
+  background: #ff4444;
+}
+
+.playlist-play-button.playing:hover {
+  background: #ff6666;
+}
