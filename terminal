@@ -1,0 +1,6 @@
+mkdir beatbot-server
+cd beatbot-server
+npm init -y
+npm install express cors dotenv mongoose bcryptjs jsonwebtoken 
+npm install
+node server.js 
